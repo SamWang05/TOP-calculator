@@ -15,6 +15,7 @@
 
     background-color: gainsboro;
     border: 15px outset #ababab;
+    border-radius: 20px;
 }
 
 .calculatorFrame {
