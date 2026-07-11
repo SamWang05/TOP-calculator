@@ -6,7 +6,11 @@ let mathOperation = "";
 
 let lastKeyStroke = ""; /* flag to identify last key stroke, useful for certain logical decisions */
 let periodOperatorUsed = false; /* flag to identify if decimal operator was used when entering the current number */
+let skipFlag = false;
 
+const allowedNumericKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+const allowedOperationKeys = ['+', '-', '*', '/'];
+const allowedUtilityKeys = ["Enter", "="];
 
 
 /* - Buttons - */
@@ -15,11 +19,15 @@ const inputButtonListeners = function(event) {
     event.preventDefault(); /* prevent mouse from highlighting accidentally */
 
     const keyStrokeTarget = event.target;
-    const keyId = keyStrokeTarget.id;
-
+    let keyId;
+    
+    if (event instanceof MouseEvent) {keyId = keyStrokeTarget.id;}
+    else if (event instanceof KeyboardEvent) {
+        if (allowedNumericKeys.includes(event.key)){keyId = event.key;}
+        else {skipFlag = true;}
+    }
+    
     if (keyStrokeTarget.tagName == "BUTTON") { /* prevent non-button targets from triggering logic (Ex: the background <div>) */
-        let periodSkipFlag = false;
-
         if (lastKeyStroke == "=") { /* if the last operator was an equals sign, and our next input is a keypad entry, it means we must be starting a new equation */
             numberOne = "";
         }
@@ -28,11 +36,11 @@ const inputButtonListeners = function(event) {
                 periodOperatorUsed = true;
             }
             else {
-                periodSkipFlag = true;
+                skipFlag = true;
             }
         }
-        if (!periodSkipFlag) {
-            if (mathOperation == "" && !periodSkipFlag) { /* if mathOperation is an empty string, it means we are currently looking to retrieve the user's first number, since the expected order of inputs is: num1 > operator > num2 */
+        if (!skipFlag) {
+            if (mathOperation == "" && !skipFlag) { /* if mathOperation is an empty string, it means we are currently looking to retrieve the user's first number, since the expected order of inputs is: num1 > operator > num2 */
                 numberOne = numberOne + keyId;
             }
             else { /* if mathOperation is not empty, it means we have a valid operator, and need the second number. For example, the prepared list of inputs may be: < 92 + ?? > */
@@ -43,6 +51,7 @@ const inputButtonListeners = function(event) {
 
             renderScreen(keyId);
         }
+        skipFlag = false;
     }
 }
 
@@ -50,6 +59,7 @@ function initializeInputButtons() {
     const inputButtonsNode = document.querySelector(".inputButtons");
 
     inputButtonsNode.addEventListener("click", inputButtonListeners);
+    inputButtonsNode.addEventListener("keyup", inputButtonListeners);
 }
 
 const operationsButtonsListeners = function(event) {
