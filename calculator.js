@@ -20,7 +20,7 @@ function initializeInputButtons() {
 
         if (keyStrokeTarget.tagName == "BUTTON") {
             if (isNaN(lastKeyStroke) && mathOperation == ""){
-                    numberOne = "";
+                numberOne = "";
             }
             if (mathOperation == "") {
                 numberOne = numberOne + keyId;
@@ -130,6 +130,7 @@ function mathOperate(mathOperator, number1, number2) {
     }
 
     numberOne = mathOutput;
+    mathResult = mathOutput;
     numberTwo = "";
     mathOperation = "";
 
