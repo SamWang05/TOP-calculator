@@ -83,9 +83,9 @@ const utilityButtonListeners = function(event) {
     const keyId = keyStrokeTarget.id;
 
     if (keyStrokeTarget.tagName == "BUTTON") {
-        if (keyId == "=") {
+        if (keyId == "=") { /* if the '=' button was pressed, initiate the operation with the given values */
             mathOperate(mathOperation, numberOne, numberTwo);
-            renderScreen("");
+            renderScreen(""); /* clears the "current input" (which would be '=') so the final output screen is only one line */
         }
         else if (keyId == "clearAll") {
             clearAll();
@@ -116,8 +116,8 @@ function renderScreen(string) {
     const currentNumberNode = document.querySelector(".currentNumber");
     const outputScreenNode = document.querySelector(".outputText");
 
-    currentNumberNode.textContent = string;
-    outputScreenNode.textContent = numberOne + " " + mathOperation + " " + numberTwo;
+    currentNumberNode.textContent = string; /* Outputs to the top of the output screen */
+    outputScreenNode.textContent = numberOne + " " + mathOperation + " " + numberTwo;  /* Since each variable has a value of "" by default, this string dynamically updates as inputs are added, without complex logic */
 }
 
 
@@ -125,7 +125,7 @@ function renderScreen(string) {
 /* - Calculations - */
 
 function addNums(num1, num2) {
-    return Number((Number(num1) + Number(num2)).toFixed(10));
+    return Number((Number(num1) + Number(num2)).toFixed(10));  /* Limits decimal to 10 trailing figures, for brevity */
 }
 
 function subNums(num1, num2) {
@@ -143,7 +143,7 @@ function divNums(num1, num2) {
 function mathOperate(mathOperator, number1, number2) {
     let mathOutput;
 
-    if (number2 == "" && mathOperator == "") mathOutput = "";
+    if (number2 == "" && mathOperator == "") mathOutput = "";  /* If only the first number was inputted and then the "=" button is pressed, output is null and system resets */
 
     else {
         if (mathOperator == "+") {
@@ -165,7 +165,7 @@ function mathOperate(mathOperator, number1, number2) {
     numberOne = mathOutput;
 }
 
-function clearAll() {
+function clearAll() { /* Purges all globals, start fresh with blank slate */
     numberOne = "";
     numberTwo = "";
     mathOperation = "";
