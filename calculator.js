@@ -9,89 +9,95 @@ let periodOperatorUsed = false;
 
 /* - Buttons - */
 
-function initializeInputButtons() {
-    const inputButtonsNode = document.querySelector(".inputButtons");
+const inputButtonListeners = function(event) {
+    event.preventDefault();
 
-    inputButtonsNode.addEventListener("click", (event) => {
-        event.preventDefault();
+    const keyStrokeTarget = event.target;
+    const keyId = keyStrokeTarget.id;
 
-        const keyStrokeTarget = event.target;
-        const keyId = keyStrokeTarget.id;
+    if (keyStrokeTarget.tagName == "BUTTON") {
+        let periodSkipFlag = false;
 
-        if (keyStrokeTarget.tagName == "BUTTON") {
-            let periodSkipFlag = false;
-
-            if (lastKeyStroke == "=") {
-                numberOne = "";
+        if (lastKeyStroke == "=") {
+            numberOne = "";
+        }
+        if (keyId == ".") {
+            if (periodOperatorUsed == false) {
+                periodOperatorUsed = true;
             }
-            if (keyId == ".") {
-                if (periodOperatorUsed == false) {
-                    periodOperatorUsed = true;
-                }
-                else {
-                    periodSkipFlag = true;
-                }
-            }
-            if (!periodSkipFlag) {
-                if (mathOperation == "" && !periodSkipFlag) {
-                    numberOne = numberOne + keyId;
-                }
-                else {
-                    numberTwo = numberTwo + keyId;
-                }
-
-                lastKeyStroke = keyId;
-
-                renderScreen(keyId);
+            else {
+                periodSkipFlag = true;
             }
         }
-    });
-}
-
-function initializeOperationsButtons() {
-    const operationsButtonsNode = document.querySelector(".operationsButtons");
-
-    operationsButtonsNode.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        const keyStrokeTarget = event.target;
-        const keyId = keyStrokeTarget.id;
-
-        if (keyStrokeTarget.tagName == "BUTTON") {
-            if (mathOperation == "") {
-                mathOperation = keyId;
-                periodOperatorUsed = false;
+        if (!periodSkipFlag) {
+            if (mathOperation == "" && !periodSkipFlag) {
+                numberOne = numberOne + keyId;
+            }
+            else {
+                numberTwo = numberTwo + keyId;
             }
 
             lastKeyStroke = keyId;
 
             renderScreen(keyId);
         }
-    });
+    }
+}
+
+function initializeInputButtons() {
+    const inputButtonsNode = document.querySelector(".inputButtons");
+
+    inputButtonsNode.addEventListener("click", inputButtonListeners);
+}
+
+const operationsButtonsListeners = function(event) {
+    event.preventDefault();
+
+    const keyStrokeTarget = event.target;
+    const keyId = keyStrokeTarget.id;
+
+    if (keyStrokeTarget.tagName == "BUTTON") {
+        if (mathOperation == "") {
+            mathOperation = keyId;
+            periodOperatorUsed = false;
+        }
+
+        lastKeyStroke = keyId;
+
+        renderScreen(keyId);
+    }
+}
+
+function initializeOperationsButtons() {
+    const operationsButtonsNode = document.querySelector(".operationsButtons");
+
+    operationsButtonsNode.addEventListener("click", operationsButtonsListeners);
+}
+
+const utilityButtonListeners = function(event) {
+    event.preventDefault();
+
+    const keyStrokeTarget = event.target;
+    const keyId = keyStrokeTarget.id;
+
+    if (keyStrokeTarget.tagName == "BUTTON") {
+        if (keyId == "=") {
+            mathOperate(mathOperation, numberOne, numberTwo);
+            renderScreen("");
+        }
+        else if (keyId == "clearAll") {
+            clearAll();
+            renderScreen("");
+        }
+
+        lastKeyStroke = keyId;
+    }
 }
 
 function initializeUtilityButtons() {
     const utilityButtonsNode = document.querySelector(".utilityButtons");
 
-    utilityButtonsNode.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        const keyStrokeTarget = event.target;
-        const keyId = keyStrokeTarget.id;
-
-        if (keyStrokeTarget.tagName == "BUTTON") {
-            if (keyId == "=") {
-                mathOperate(mathOperation, numberOne, numberTwo);
-                renderScreen("");
-            }
-            else if (keyId == "clearAll") {
-                clearAll();
-                renderScreen("");
-            }
-
-            lastKeyStroke = keyId;
-        }
-    });
+    utilityButtonsNode.addEventListener("click", utilityButtonListeners);
 }
 
 function initializeButtons() {
