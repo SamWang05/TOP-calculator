@@ -59,10 +59,9 @@ const operationsButtonsListeners = function(event) {
     const keyId = keyStrokeTarget.id;
 
     if (keyStrokeTarget.tagName == "BUTTON") {
-        if (mathOperation == "") { /* if a mathOperation was not yet inputted, we will accept. Otherwise, simply ignore. */
+        if (mathOperation == "") { /* if a math operator (+/-/×/÷) was not yet inputted, we will accept. Otherwise, simply ignore. */
             mathOperation = keyId;
-            periodOperatorUsed = false;
-
+            periodOperatorUsed = false; /* Once the math operator is inputted, it means that we will be expecting a new number (num2). Therefore, we can unlock the period button for use again.*/
 
             lastKeyStroke = keyId;
 
