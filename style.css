@@ -1,3 +1,8 @@
+@font-face {
+  font-family: calculatorOutput;
+  src: url(./fonts/orbitronFont.woff2);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -35,7 +40,7 @@
 
     background-color: azure;
 
-    font-family: "OCR A Std", monospace;
+    font-family: calculatorOutput;
     font-size: 32px;
 }
 
@@ -101,6 +106,8 @@ button {
 .calculatorFrame > .controlButtons > .moduleOne > .operationsButtons > button {
     width: 120px;
     height: 60px;
+
+    font-size: 32px;
 }
 
 
