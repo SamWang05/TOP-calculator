@@ -1,27 +1,29 @@
+/* - Global Variables - */
+
 let numberOne = "";
 let numberTwo = "";
 let mathOperation = "";
 
-let lastKeyStroke = "";
-let periodOperatorUsed = false;
+let lastKeyStroke = ""; /* flag to identify last key stroke, useful for certain logical decisions */
+let periodOperatorUsed = false; /* flag to identify if decimal operator was used when entering the current number */
 
 
 
 /* - Buttons - */
 
 const inputButtonListeners = function(event) {
-    event.preventDefault();
+    event.preventDefault(); /* prevent mouse from highlighting accidentally */
 
     const keyStrokeTarget = event.target;
     const keyId = keyStrokeTarget.id;
 
-    if (keyStrokeTarget.tagName == "BUTTON") {
+    if (keyStrokeTarget.tagName == "BUTTON") { /* prevent non-button targets from triggering logic (Ex: the background <div>) */
         let periodSkipFlag = false;
 
-        if (lastKeyStroke == "=") {
+        if (lastKeyStroke == "=") { /* if the last operator was an equals sign, and our next input is a keypad entry, it means we must be starting a new equation */
             numberOne = "";
         }
-        if (keyId == ".") {
+        if (keyId == ".") { /* logic to identify if period operator is being misused (pressed repeatedly) */
             if (periodOperatorUsed == false) {
                 periodOperatorUsed = true;
             }
@@ -30,10 +32,10 @@ const inputButtonListeners = function(event) {
             }
         }
         if (!periodSkipFlag) {
-            if (mathOperation == "" && !periodSkipFlag) {
+            if (mathOperation == "" && !periodSkipFlag) { /* if mathOperation is an empty string, it means we are currently looking to retrieve the user's first number, since the expected order of inputs is: num1 > operator > num2 */
                 numberOne = numberOne + keyId;
             }
-            else {
+            else { /* if mathOperation is not empty, it means we have a valid operator, and need the second number. For example, the prepared list of inputs may be: < 92 + ?? > */
                 numberTwo = numberTwo + keyId;
             }
 
@@ -57,7 +59,7 @@ const operationsButtonsListeners = function(event) {
     const keyId = keyStrokeTarget.id;
 
     if (keyStrokeTarget.tagName == "BUTTON") {
-        if (mathOperation == "") {
+        if (mathOperation == "") { /* if a mathOperation was not yet inputted, we will accept. Otherwise, simply ignore. */
             mathOperation = keyId;
             periodOperatorUsed = false;
         }
