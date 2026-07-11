@@ -3,6 +3,7 @@ let numberTwo = "";
 let mathOperation = "";
 
 let lastKeyStroke = "";
+let periodOperatorUsed = false;
 
 
 
@@ -18,19 +19,31 @@ function initializeInputButtons() {
         const keyId = keyStrokeTarget.id;
 
         if (keyStrokeTarget.tagName == "BUTTON") {
-            if (lastKeyStroke == "="){
+            let periodSkipFlag = false;
+
+            if (lastKeyStroke == "=") {
                 numberOne = "";
             }
-            if (mathOperation == "") {
-                numberOne = numberOne + keyId;
+            if (keyId == ".") {
+                if (periodOperatorUsed == false) {
+                    periodOperatorUsed = true;
+                }
+                else {
+                    periodSkipFlag = true;
+                }
             }
-            else {
-                numberTwo = numberTwo + keyId;
+            if (!periodSkipFlag) {
+                if (mathOperation == "" && !periodSkipFlag) {
+                    numberOne = numberOne + keyId;
+                }
+                else {
+                    numberTwo = numberTwo + keyId;
+                }
+
+                lastKeyStroke = keyId;
+
+                renderScreen(keyId);
             }
-
-            lastKeyStroke = keyId;
-
-            renderScreen(keyId);
         }
     });
 }
@@ -47,6 +60,7 @@ function initializeOperationsButtons() {
         if (keyStrokeTarget.tagName == "BUTTON") {
             if (mathOperation == "") {
                 mathOperation = keyId;
+                periodOperatorUsed = false;
             }
 
             lastKeyStroke = keyId;
@@ -66,13 +80,11 @@ function initializeUtilityButtons() {
         const keyId = keyStrokeTarget.id;
 
         if (keyStrokeTarget.tagName == "BUTTON") {
-
-            if (keyStrokeTarget.id == "=") {
+            if (keyId == "=") {
                 mathOperate(mathOperation, numberOne, numberTwo);
                 renderScreen("");
             }
-
-            else if (keyStrokeTarget.id == "clearAll") {
+            else if (keyId == "clearAll") {
                 clearAll();
                 renderScreen("");
             }
@@ -151,6 +163,7 @@ function clearAll() {
     mathOperation = "";
 
     lastKeyStroke = "";
+    periodOperatorUsed = false;
 }
 
 
