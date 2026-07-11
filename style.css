@@ -30,6 +30,10 @@ body {
     padding: 20px;
 
     background-color: antiquewhite;
+
+    border: 5px outset antiquewhite;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .titleBanner > .title {
