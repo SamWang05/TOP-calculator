@@ -7,6 +7,45 @@
     box-sizing: border-box;
 }
 
+
+
+/* - WEBPAGE TITLE/AUTHOR - */
+
+body {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    gap: 50px;
+}
+
+.titleBanner {
+    display: flex;
+    flex-direction: column;
+
+    width: 1000px;
+
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+
+    background-color: antiquewhite;
+}
+
+.titleBanner > .title {
+    font-size: 32px;
+}
+
+.titleBanner > .author {
+    font-size: 18px;
+}
+
+.titleBanner > .desc {
+    font-size: 12px;
+}
+
+
+
 /* - CALCULATOR BACKGROUND COSMETICS - */
 
 .calculatorModule {
@@ -15,9 +54,6 @@
     background-color: gainsboro;
     border: 15px outset #ababab;
     border-radius: 20px;
-
-    margin-top: 50px;
-    margin-left: 50px;
 
     width: 500px;
     height: 800px;
@@ -60,6 +96,7 @@
 
 button {
     font-size: 24px;
+    font-weight: 700;
 
     border: 5px outset;
 }
