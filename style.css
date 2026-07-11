@@ -31,6 +31,7 @@
 
 .calculatorFrame > .outputScreen {
     display: flex;
+    flex-direction: column;
 
     justify-content: right;
     align-items: end;
@@ -38,11 +39,16 @@
     height: 160px;
     border: 15px inset;
     padding: 20px;
+    gap: 24px;
 
     background-color: azure;
 
     font-family: calculatorOutput;
     font-size: 32px;
+}
+
+.calculatorFrame > .outputScreen > .outputText {
+    font-size: 18px;
 }
 
 /* - BUTTONS - */
