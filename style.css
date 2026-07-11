@@ -1,5 +1,5 @@
 * {
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 
 /* - CALCULATOR BACKGROUND COSMETICS - */
@@ -41,17 +41,41 @@
 
 /* - BUTTONS - */
 
+button {
+    font-size: 24px;
+
+    border: 5px outset;
+}
+
 .calculatorFrame > .controlButtons {
     display: flex;
+    flex-direction: column;
+
+    margin: 10px;
+}
+
+
+
+/* - INPUT KEYPAD - */
+
+
+.calculatorFrame > .controlButtons > .moduleOne {
+    display: flex;
+    flex-direction: row;
 
     justify-content: space-between;
 
-    padding: 10px;
     gap: 50px;
     margin-top: 50px;
 }
 
-.calculatorFrame > .controlButtons > .inputButtons > .buttonRow {
+.calculatorFrame > .controlButtons > .moduleOne > .inputButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.calculatorFrame > .controlButtons > .moduleOne > .inputButtons > .buttonRow {
     display: flex;
     flex-direction: row;
 
@@ -59,28 +83,53 @@
     gap: 20px;
 }
 
-.calculatorFrame > .controlButtons > .operationsButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.calculatorFrame > .controlButtons > .moduleOne > .inputButtons button {
+    width: 60px;
+    height: 60px;
 }
 
-button {
-    font-size: 24px;
-}
 
-.calculatorFrame > .controlButtons > .operationsButtons > button {
-    width: 100px;
-    height: 50px;
-}
 
-.calculatorFrame > .controlButtons > .inputButtons {
+/* - OPERATIONS KEYPAD - */
+
+.calculatorFrame > .controlButtons > .moduleOne > .operationsButtons {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.calculatorFrame > .controlButtons > .inputButtons button {
-    width: 50px;
-    height: 50px;
+.calculatorFrame > .controlButtons > .moduleOne > .operationsButtons > button {
+    width: 120px;
+    height: 60px;
+}
+
+
+
+/* - UTILITIES KEYPAD - */
+
+.calculatorFrame > .controlButtons > .moduleTwo {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+
+    margin-top: 50px;
+}
+
+.calculatorFrame > .controlButtons > .moduleTwo > .utilityButtons {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+
+    justify-content: space-between;
+}
+
+.calculatorFrame > .controlButtons > .moduleTwo > .utilityButtons > button {
+    width: 175px;
+    height: 120px;
+
+    font-size: 36px;
+
+    text-align: center;
 }
