@@ -72,6 +72,11 @@ function initializeUtilityButtons() {
                 renderScreen("");
             }
 
+            else if (keyStrokeTarget.id == "clearAll") {
+                clearAll();
+                renderScreen("");
+            }
+
             lastKeyStroke = keyId;
         }
     });
@@ -118,22 +123,34 @@ function divNums(num1, num2) {
 function mathOperate(mathOperator, number1, number2) {
     let mathOutput;
 
-    if (mathOperator == "+") {
-        mathOutput = String(addNums(number1, number2));
-    }
-    if (mathOperator == "-") {
-        mathOutput = String(subNums(number1, number2));
-    }
-    if (mathOperator == "*") {
-        mathOutput = String(multNums(number1, number2));
-    }
-    if (mathOperator == "/") {
-        mathOutput = String(divNums(number1, number2));
+    if (number2 == "" && mathOperator == "") mathOutput = "";
+
+    else {
+        if (mathOperator == "+") {
+            mathOutput = String(addNums(number1, number2));
+        }
+        if (mathOperator == "-") {
+            mathOutput = String(subNums(number1, number2));
+        }
+        if (mathOperator == "*") {
+            mathOutput = String(multNums(number1, number2));
+        }
+        if (mathOperator == "/") {
+            mathOutput = String(divNums(number1, number2));
+        }
     }
 
+    clearAll();
+
     numberOne = mathOutput;
+}
+
+function clearAll() {
+    numberOne = "";
     numberTwo = "";
     mathOperation = "";
+
+    lastKeyStroke = "";
 }
 
 
