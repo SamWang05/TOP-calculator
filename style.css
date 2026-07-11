@@ -10,12 +10,17 @@
 /* - CALCULATOR BACKGROUND COSMETICS - */
 
 .calculatorModule {
-    width: 500px;
-    height: 800px;
+    display: flex;
 
     background-color: gainsboro;
     border: 15px outset #ababab;
     border-radius: 20px;
+
+    margin-top: 50px;
+    margin-left: 50px;
+
+    width: 500px;
+    height: 800px;
 }
 
 .calculatorFrame {
