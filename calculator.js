@@ -1,7 +1,6 @@
 let numberOne = "";
 let numberTwo = "";
 let mathOperation = "";
-let mathResult = "";
 
 let lastKeyStroke = "";
 
@@ -19,7 +18,7 @@ function initializeInputButtons() {
         const keyId = keyStrokeTarget.id;
 
         if (keyStrokeTarget.tagName == "BUTTON") {
-            if (isNaN(lastKeyStroke) && mathOperation == ""){
+            if (lastKeyStroke == "="){
                 numberOne = "";
             }
             if (mathOperation == "") {
@@ -69,7 +68,7 @@ function initializeUtilityButtons() {
         if (keyStrokeTarget.tagName == "BUTTON") {
 
             if (keyStrokeTarget.id == "=") {
-                mathResult = mathOperate(mathOperation, numberOne, numberTwo);
+                mathOperate(mathOperation, numberOne, numberTwo);
                 renderScreen("");
             }
 
@@ -101,19 +100,19 @@ function renderScreen(string) {
 /* - Calculations - */
 
 function addNums(num1, num2) {
-    return num1 + num2;
+    return Number((Number(num1) + Number(num2)).toFixed(10));
 }
 
 function subNums(num1, num2) {
-    return num1 - num2;
+    return Number((Number(num1) - Number(num2)).toFixed(10));
 }
 
 function multNums(num1, num2) {
-    return num1 * num2;
+    return Number((Number(num1) * Number(num2)).toFixed(10));
 }
 
 function divNums(num1, num2) {
-    return num1 / num2;
+    return Number((Number(num1) / Number(num2)).toFixed(10));
 }
 
 function mathOperate(mathOperator, number1, number2) {
@@ -133,11 +132,8 @@ function mathOperate(mathOperator, number1, number2) {
     }
 
     numberOne = mathOutput;
-    mathResult = mathOutput;
     numberTwo = "";
     mathOperation = "";
-
-    return mathOutput;
 }
 
 
