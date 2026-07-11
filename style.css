@@ -1,0 +1,86 @@
+* {
+    box-sizing: content-box;
+}
+
+/* - CALCULATOR BACKGROUND COSMETICS - */
+
+.calculatorModule {
+    width: 500px;
+    height: 800px;
+
+    background-color: gainsboro;
+    border: 15px outset #ababab;
+}
+
+.calculatorFrame {
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+}
+
+
+
+/* - OUTPUT SCREEN - */
+
+.calculatorFrame > .outputScreen {
+    display: flex;
+
+    justify-content: right;
+    align-items: end;
+
+    height: 160px;
+    border: 15px inset;
+    padding: 20px;
+
+    background-color: azure;
+
+    font-family: "OCR A Std", monospace;
+    font-size: 32px;
+}
+
+/* - BUTTONS - */
+
+.calculatorFrame > .controlButtons {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.calculatorFrame > .controlButtons > .inputButtons > .buttonRow {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    gap: 20px;
+}
+
+.calculatorFrame > .controlButtons > .operationsButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    font-size: 24px;
+}
+
+.calculatorFrame > .controlButtons > .operationsButtons > button {
+    width: 100px;
+    height: 50px;
+}
+
+.calculatorFrame > .controlButtons > .inputButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.calculatorFrame > .controlButtons > .inputButtons button {
+    width: 50px;
+    height: 50px;
+}
