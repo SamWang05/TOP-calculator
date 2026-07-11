@@ -31,7 +31,7 @@ function initializeInputButtons() {
 
             lastKeyStroke = keyId;
 
-            renderScreen(keyId, "firstNum");
+            renderScreen(keyId);
         }
     });
 }
@@ -52,7 +52,7 @@ function initializeOperationsButtons() {
 
             lastKeyStroke = keyId;
 
-            renderScreen(keyId, "mathOp");
+            renderScreen(keyId);
         }
     });
 }
@@ -70,11 +70,10 @@ function initializeUtilityButtons() {
 
             if (keyStrokeTarget.id == "=") {
                 mathResult = mathOperate(mathOperation, numberOne, numberTwo);
+                renderScreen("");
             }
 
             lastKeyStroke = keyId;
-
-            renderScreen(keyId, "secondNum");
         }
     });
 }
@@ -89,8 +88,12 @@ function initializeButtons() {
 
 /* - Screen - */
 
-function renderScreen(string, target) {
-    
+function renderScreen(string) {
+    const currentNumberNode = document.querySelector(".currentNumber");
+    const outputScreenNode = document.querySelector(".outputText");
+
+    currentNumberNode.textContent = string;
+    outputScreenNode.textContent = numberOne + " " + mathOperation + " " + numberTwo;
 }
 
 

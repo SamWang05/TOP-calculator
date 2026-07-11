@@ -44,11 +44,11 @@
     background-color: azure;
 
     font-family: calculatorOutput;
-    font-size: 32px;
+    font-size: 18px;
 }
 
 .calculatorFrame > .outputScreen > .outputText {
-    font-size: 18px;
+    font-size: 32px;
 }
 
 /* - BUTTONS - */
