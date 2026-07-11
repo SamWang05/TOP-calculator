@@ -89,6 +89,13 @@ button {
     gap: 20px;
 }
 
+.calculatorFrame > .controlButtons > .moduleOne > .inputButtons > .lastRow {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: right;
+}
+
 .calculatorFrame > .controlButtons > .moduleOne > .inputButtons button {
     width: 60px;
     height: 60px;
