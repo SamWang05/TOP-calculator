@@ -62,11 +62,12 @@ const operationsButtonsListeners = function(event) {
         if (mathOperation == "") { /* if a mathOperation was not yet inputted, we will accept. Otherwise, simply ignore. */
             mathOperation = keyId;
             periodOperatorUsed = false;
+
+
+            lastKeyStroke = keyId;
+
+            renderScreen(keyId);
         }
-
-        lastKeyStroke = keyId;
-
-        renderScreen(keyId);
     }
 }
 
