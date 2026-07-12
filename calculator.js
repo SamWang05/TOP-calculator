@@ -10,7 +10,7 @@ let skipFlag = false; /* useful for breaking out of listener sequence if a bad i
 
 const allowedNumericKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
 const allowedOperationKeys = ['+', '-', '*', '/'];
-const allowedUtilityKeys = ["Delete", "="];
+const allowedUtilityKeys = ["Delete", "Backspace", "=", "Enter"];
 
 
 
@@ -28,7 +28,7 @@ const inputButtonListeners = function(event) {
         else {skipFlag = true;}
     }
     
-    if (keyStrokeTarget.tagName == "BUTTON") { /* prevent non-button targets from triggering logic (Ex: the background <div>) */
+    if (keyStrokeTarget.tagName == "BUTTON" || event instanceof KeyboardEvent) { /* prevent non-button targets from triggering logic (Ex: the background <div>) */
         if (lastKeyStroke == "=") { /* if the last operator was an equals sign, and our next input is a keypad entry, it means we must be starting a new equation */
             numberOne = "";
         }
@@ -60,7 +60,7 @@ function initializeInputButtons() {
     const inputButtonsNode = document.querySelector(".inputButtons");
 
     inputButtonsNode.addEventListener("click", inputButtonListeners);
-    inputButtonsNode.addEventListener("keyup", inputButtonListeners);
+    document.addEventListener("keyup", inputButtonListeners);
 }
 
 const operationsButtonsListeners = function(event) {
@@ -75,7 +75,7 @@ const operationsButtonsListeners = function(event) {
         else {skipFlag = true;}
     }
 
-    if (keyStrokeTarget.tagName == "BUTTON") {
+    if (keyStrokeTarget.tagName == "BUTTON" || event instanceof KeyboardEvent) {
         if (mathOperation == "" && !skipFlag) { /* if a math operator (+/-/×/÷) was not yet inputted, we will accept. Otherwise, simply ignore. */
             mathOperation = keyId;
             periodOperatorUsed = false; /* Once the math operator is inputted, it means that we will be expecting a new number (num2). Therefore, we can unlock the period button for use again.*/
@@ -93,7 +93,7 @@ function initializeOperationsButtons() {
     const operationsButtonsNode = document.querySelector(".operationsButtons");
 
     operationsButtonsNode.addEventListener("click", operationsButtonsListeners);
-    operationsButtonsNode.addEventListener("keyup", operationsButtonsListeners);
+    document.addEventListener("keyup", operationsButtonsListeners);
 }
 
 const utilityButtonListeners = function(event) {
@@ -108,17 +108,19 @@ const utilityButtonListeners = function(event) {
         else {skipFlag = true;}
     }
 
-    if (keyStrokeTarget.tagName == "BUTTON") {
-        if (keyId == "=" && !skipFlag) { /* if the '=' button was pressed, initiate the operation with the given values */
+    if (keyStrokeTarget.tagName == "BUTTON" || event instanceof KeyboardEvent) {
+        if ((keyId == "=" || keyId == "Enter") && !skipFlag) { /* if the '=' button was pressed, initiate the operation with the given values */
             mathOperate(mathOperation, numberOne, numberTwo);
             renderScreen(""); /* clears the "current input" (which would be '=') so the final output screen is only one line */
         }
-        else if (keyId == "Delete" && !skipFlag) {
+        else if ((keyId == "Delete" || keyId == "Backspace") && !skipFlag) {
             clearAll();
             renderScreen("");
         }
 
         lastKeyStroke = keyId;
+
+        skipFlag = false;
     }
 }
 
@@ -126,7 +128,7 @@ function initializeUtilityButtons() {
     const utilityButtonsNode = document.querySelector(".utilityButtons");
 
     utilityButtonsNode.addEventListener("click", utilityButtonListeners);
-    utilityButtonsNode.addEventListener("keyup", utilityButtonListeners);
+    document.addEventListener("keyup", utilityButtonListeners);
 }
 
 function initializeButtons() {
