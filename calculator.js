@@ -21,9 +21,9 @@ const inputButtonListeners = function(event) {
     const keyStrokeTarget = event.target;
     let keyId;
     
-    if (event instanceof MouseEvent) {keyId = keyStrokeTarget.id;}
+    if (event instanceof MouseEvent) {keyId = keyStrokeTarget.id;} /* if the event is a mouse event, keyId is defined using mouse event logic */
     else if (event instanceof KeyboardEvent) {
-        if (allowedNumericKeys.includes(event.key)){keyId = event.key;}
+        if (allowedNumericKeys.includes(event.key)){keyId = event.key;} /* if the event is a keyboard event, and the key is a valid key, define keyId using keyboard event logic */
         else {skipFlag = true;}
     }
     
