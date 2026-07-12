@@ -52,6 +52,7 @@ const inputButtonListeners = function(event) {
 
             renderScreen(keyId);
         }
+        
         skipFlag = false;
     }
 }
